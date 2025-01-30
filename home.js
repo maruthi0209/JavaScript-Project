@@ -27,22 +27,29 @@ window.addEventListener("load", () => {
     populateFooterSection();
 })
 
-async function getData(URL, localStorageItem) {
+async function getData(URL) {
     let responseData;
     try {
         let response = await fetch(URL, {
             method : "GET",
             headers : {"content-type" : "application/json"}
         });
-        if (response.ok) {
-            localStorage.setItem(localStorageItem, JSON.stringify(await response.json()));
-            responseData = JSON.parse(localStorage.getItem(localStorageItem));
+        if (response.ok) { 
+            responseData = await response.json();
             return responseData;
         } else {
             throw new Error("There was an error fetching the data. Please try again later.");
         }        
     } catch (error) {
-        console.error(error.message);
+        console.error(error);
+    }
+}
+
+function setLocalStorage(localStorageData, localStorageItem) {
+    try {
+        localStorage.setItem(localStorageItem, JSON.stringify(localStorageData));
+    } catch(error) {
+        console.error(error);
     }
 }
 
@@ -92,7 +99,8 @@ function populateMainSection() {
 }
 
 async function populateCategorySection(categoryContainer) {
-    let categoryData = await getData(categoryURL, "category");
+    let categoryData = await getData(categoryURL);
+    // console.log(categoryData);
     let categoryTitle = document.createElement("div");
     categoryTitle.id = "categoryTitle";
     categoryContainer.appendChild(categoryTitle);
@@ -110,11 +118,17 @@ async function populateCategorySection(categoryContainer) {
 
         categoryCard.append(categoryImgContainer, categoryTitleContainer);
         categoryContainer.appendChild(categoryCard);
+
+        categoryCard.addEventListener("click", () => {
+            setLocalStorage(category, "category");
+            window.location.href = "./content.html";
+        });
     });
 }
 
 async function populateIngredientSection(ingredientContainer) {
-    let ingredientData = await getData(ingredientURL, "ingredient");
+    let ingredientData = await getData(ingredientURL);
+    // console.log(ingredientData);
     let ingredientTitle = document.createElement("div");
     ingredientTitle.id = "ingredientTitle";
     ingredientContainer.appendChild(ingredientTitle);
@@ -132,12 +146,17 @@ async function populateIngredientSection(ingredientContainer) {
 
         ingredientCard.append(ingredientImgContainer, ingredientTitleContainer);
         ingredientContainer.appendChild(ingredientCard);
+
+        ingredientCard.addEventListener("click", () => {
+            setLocalStorage(ingredient, "ingredients");
+            window.location.href = "./content.html";
+        });
     });
 }
 
 async function populateRandomSection(randomContainer) {
-    let randomData = await getData(randomURL, "random");
-    console.log(randomData);
+    let randomData = await getData(randomURL);
+    // console.log(randomData);
     let randomTitle = document.createElement("div");
     randomTitle.id = "randomTitle";
     randomTitle.innerText = "Recipe of the Day!" + `${randomData[0]['strMeal']}`;
@@ -147,6 +166,11 @@ async function populateRandomSection(randomContainer) {
     randomImg.src = `${randomData[0]['strMealThumb']}`;
     randomImgContainer.appendChild(randomImg);
     randomContainer.append(randomTitle, randomImgContainer);
+
+    randomContainer.addEventListener("click", () => {
+        setLocalStorage(randomData, "randomData");
+        window.location.href = "./content.html";
+    });
 }
 
 async function populateAlphabetSection(alphabetContainer) {
@@ -160,6 +184,11 @@ async function populateAlphabetSection(alphabetContainer) {
         alphabetCard.id = "alphabetCard";
         alphabetCard.innerHTML = `<a href=${alphabetURL + alphabet}>${alphabet}</a>`;
         alphabetContainer.appendChild(alphabetCard);
+
+        alphabetCard.addEventListener("click", () => {
+            setLocalStorage(getData(alphabetURL + alphabet), "alphabet");
+            window.location.href = "./content.html";
+        });
     });  
 }
 
@@ -175,6 +204,11 @@ async function populateAreaSection(areaContainer) {
         areaCard.innerHTML = `<a href='${areaURL}${country[0]}'><img src='${country[1]}'></a>`;
         // console.log(`<ahref=${areaURL} + ${country[0]}></a>`);
         areaContainer.appendChild(areaCard);
+
+        areaCard.addEventListener("click", () => {
+            setLocalStorage(getData(areaURL + country[0]), "area");
+            window.location.href = "./content.html";
+        });
     }
 }
 
