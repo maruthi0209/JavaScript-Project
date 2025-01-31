@@ -32,7 +32,7 @@ async function getData(URL) {
     try {
         let response = await fetch(URL, {
             method : "GET",
-            headers : {"content-type" : "application/json"}
+            headers : {"content-type" : "application/json", "Access-Control-Allow-Origin": "*"}
         });
         if (response.ok) { 
             responseData = await response.json();
@@ -121,7 +121,7 @@ async function populateCategorySection(categoryContainer) {
 
         categoryCard.addEventListener("click", () => {
             setLocalStorage(category, "category");
-            window.location.href = "./content.html";
+            window.location.href = "./category.html";
         });
     });
 }
@@ -148,8 +148,8 @@ async function populateIngredientSection(ingredientContainer) {
         ingredientContainer.appendChild(ingredientCard);
 
         ingredientCard.addEventListener("click", () => {
-            setLocalStorage(ingredient, "ingredients");
-            window.location.href = "./content.html";
+            setLocalStorage(ingredient, "ingredient");
+            window.location.href = "./ingredient.html";
         });
     });
 }
@@ -169,7 +169,7 @@ async function populateRandomSection(randomContainer) {
 
     randomContainer.addEventListener("click", () => {
         setLocalStorage(randomData, "randomData");
-        window.location.href = "./content.html";
+        window.location.href = "./randomData.html";
     });
 }
 
