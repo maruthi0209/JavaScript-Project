@@ -40,8 +40,8 @@ function populateHeaderSection() {
 
 function populateMainContentSection() {
     let mainContainer = document.getElementById("mainContainer")
-    let randomData = getLocalStorage("randomData")[0];
-    // console.log(randomData);
+    let randomData = getLocalStorage("randomData");
+    localStorage.removeItem("randomData");// console.log(randomData); 
     let randomName = document.createElement("div");
     randomName.id = "randomName";
     randomName.innerText = `${randomData['strMeal']}`;

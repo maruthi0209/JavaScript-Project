@@ -39,3 +39,11 @@ Frontend: HTML, CSS, JavaScript.
 API Integration: MealDB API (for recipe data)
 Data Format: JSON (for API responses)
 Responsive Design: Media Queries for mobile-friendly layout
+
+
+To Be Done - 
+1. Search functionality
+2. User Validation
+3. Cart functionality
+4. Footer section
+5. UI completion.
