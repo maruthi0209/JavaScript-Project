@@ -24,9 +24,11 @@ const listOfCountries = new Map([["American", 'https://www.countryflags.com/wp-c
 ["Mexican", 'https://www.countryflags.com/wp-content/uploads/mexico-flag-png-large.png']]);
 
 window.addEventListener("load", () => {
-    populateHeaderSection();
-    populateMainSection();
-    populateFooterSection();
+        populateHeaderSection();
+        populateMainSection();
+        populateFooterSection();
+
+        displayLoader();
 })
 
 async function getData(URL) {
@@ -74,6 +76,47 @@ function returnBackButton(containerName) {
     });
     backButtonContainer.appendChild(backButton);
     return backButtonContainer;
+}
+
+function displayLoader() {
+    quoteArrays = ['"Let food be thy medicine and medicine be thy food." - Hippocrates', 
+        '"People who love to eat are always the best people." - Julia Child',
+        '"The only way to get rid of a temptation is to yield to it." - Oscar Wilde',
+        '"First we eat, then we do everything else." - M.F.K. Fisher',
+        '"Food should be fun." - Thomas Keller'];
+    animationArrays = ["./bbqGiphy.gif", "./gokGiphy.gif", "./panGiphy.gif", "./playGiphy.gif", "./potGiphy.gif"];
+    let loaderScreen = document.createElement("div");
+    loaderScreen.id = "loaderScreen";
+    let loaderAnimation = document.createElement("div");
+    loaderAnimation.id = "loaderAnimation";
+    loaderAnimation.innerHTML = `<img src=${animationArrays[Math.floor(Math.random() * animationArrays.length)]} alt="Cooking Gif for you darling!">`;
+    let loaderQuote = document.createElement("div");
+    loaderQuote.id = "loaderQuote";
+    loaderQuote.innerText = quoteArrays[Math.floor(Math.random() * quoteArrays.length)];
+    loaderScreen.append(loaderAnimation, loaderQuote);
+    console.log(loaderQuote.innerText, loaderAnimation.innerHTML);
+    // if (display) {
+    //     loaderScreen.classList.remove("removeLoader");
+    //     loaderScreen.classList.add("displayLoader");
+    // } else {
+    //     loaderScreen.classList.remove("displayLoader");
+    //     loaderScreen.classList.add("removeLoader");
+    // }
+    loaderScreen.style.display = "block";
+    document.body.appendChild(loaderScreen);
+}
+
+function displayToastMessage(display) {
+    let messageContainer = document.createElement("div");
+    messageContainer.id = "messageContainer";
+    messageContainer.innerText = "Welcome back to the club!!";
+    if (display) {
+        messageContainer.classList.remove("removeMessage");
+        messageContainer.classList.add("displayMessage");
+    } else {
+        messageContainer.classList.remove("displayMessage");
+        messageContainer.classList.add("removeMessage");
+    }
 }
 
 function populateHeaderSection() {
@@ -191,7 +234,7 @@ async function populateIngredientSection(ingredientContainer) {
     ingredientData.forEach(async ingredient => {
         let ingredientRecipeInfo = await getData(idURL + `${ingredient['idMeal']}`);
         let ingredientCard = document.createElement("div");
-        ingredientCard.id = "ingredientCard";
+        ingredientCard.id = "ingredientCard" + `${ingredient['idMeal']}`;
         let ingredientImgContainer = document.createElement("div");
         ingredientImgContainer.id = "categoryImgContainer";
         let ingredientImg = document.createElement("img");
@@ -330,10 +373,13 @@ function populateFooterSection() {
     let footerSection = document.getElementById("footer");
     let aboutContainer = document.createElement("div");
     aboutContainer.id = "aboutContainer";
+    aboutContainer.innerText = "Hi, My name is Sethu Maruthi and I'm the creator of My Recipe Finder. I live in Hyderabad and I like cooking various recipes that I come across during my travels to various new places. Hope you find a recipe that touches your heart and fills you with joy. ";
     let contactContainer = document.createElement("div");
     contactContainer.id = "contactContainer";
+    contactContainer.innerText = "I live in Hyderabad, India. You can reach out to me at sethumaruthi93@gmail.com."
     let copyright = document.createElement("div");
     copyright.id = "copyright";
+    copyright.innerText = ` &copy; copyright 2025. All rights reserved.`;
 
     footerSection.append(aboutContainer, contactContainer, copyright);
 }
