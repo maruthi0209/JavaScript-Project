@@ -188,23 +188,31 @@ async function populateCategorySection(categoryContainer) {
     let categoryData = await getData(categoryURL);
     let categoryTitle = document.createElement("div");
     categoryTitle.id = "categoryTitle";
+    categoryTitle.classList.add("corinthia-bold");
+    categoryTitle.innerText = "Popular Categories";
     let categoryModal = returnModal("category");
-    categoryContainer.append(categoryTitle, categoryModal);
+    let categoryCardContainer = document.createElement("div");
+    categoryCardContainer.id = "categoryCardContainer";
+    categoryContainer.append(categoryTitle, categoryModal, categoryCardContainer);
     categoryData.forEach(async category => {
         let listOfRecipes = await getData(categorySearchURL + `${category['strCategory']}`)
         // console.log(category);
         let categoryCard = document.createElement("div");
         categoryCard.id = "categoryCard" + `${category['strCategory']}`;
+        categoryCard.classList.add("categoryCard");
         let categoryImgContainer = document.createElement("div");
         categoryImgContainer.id = "categoryImgContainer"+ `${category['strCategory']}`;
+        categoryImgContainer.classList.add("categoryImgContainer");
         let categoryImg = document.createElement("img");
         categoryImg.src = `${category['strCategoryThumb']}`;
         categoryImgContainer.appendChild(categoryImg);
         let categoryTitleContainer = document.createElement("div");
         categoryTitleContainer.id = "categoryTitleContainer"+ `${category['strCategory']}`;
         categoryTitleContainer.innerText = `${category['strCategory']}`;
+        categoryTitleContainer.classList.add("corinthia-regular");
+        categoryTitleContainer.classList.add("categoryTitleContainer");
         categoryCard.append(categoryImgContainer, categoryTitleContainer);
-        categoryContainer.appendChild(categoryCard);
+        categoryCardContainer.appendChild(categoryCard);
         categoryCard.addEventListener("click", () => {
             categoryModal.style.display = "block";
             displayCategoryModal(categoryModal, category, listOfRecipes);
@@ -252,22 +260,29 @@ async function populateIngredientSection(ingredientContainer) {
     // console.log(ingredientData);
     let ingredientTitle = document.createElement("div");
     ingredientTitle.id = "ingredientTitle";
+    ingredientTitle.innerText = "Popular Recipes";
+    ingredientTitle.classList.add("corinthia-bold");
+    let ingredientCardContainer = document.createElement("div");
+    ingredientCardContainer.id = "ingredientCardContainer";
     ingredientContainer.appendChild(ingredientTitle);
     ingredientData.forEach(async ingredient => {
         let ingredientRecipeInfo = await getData(idURL + `${ingredient['idMeal']}`);
         let ingredientCard = document.createElement("div");
         ingredientCard.id = "ingredientCard" + `${ingredient['idMeal']}`;
+        ingredientCard.classList.add("ingredientCard");
         let ingredientImgContainer = document.createElement("div");
-        ingredientImgContainer.id = "categoryImgContainer";
+        ingredientImgContainer.id = "ingredientImgContainer";
         let ingredientImg = document.createElement("img");
         ingredientImg.src = `${ingredient['strMealThumb']}`;
         ingredientImgContainer.appendChild(ingredientImg);
         let ingredientTitleContainer = document.createElement("div");
         ingredientTitleContainer.id = "ingredientTitleContainer";
         ingredientTitleContainer.innerText = `${ingredient['strMeal']}`;
+        ingredientTitleContainer.classList.add("corinthia-regular");
 
         ingredientCard.append(ingredientImgContainer, ingredientTitleContainer);
-        ingredientContainer.appendChild(ingredientCard);
+        ingredientCardContainer.appendChild(ingredientCard);
+        ingredientContainer.appendChild(ingredientCardContainer);
 
         ingredientCard.addEventListener("click", () => { 
             // console.log(ingredientRecipeInfo);
@@ -284,11 +299,16 @@ async function populateRandomSection(randomContainer) {
     // console.log(randomData);
     let randomTitle = document.createElement("div");
     randomTitle.id = "randomTitle";
-    randomTitle.innerText = "Recipe of the Day!" + `${randomData['strMeal']}`;
+    randomTitle.classList.add("corinthia-bold");
+    randomTitle.innerText = "Recipe of the Day!" ;
+    let randomRecipeName = document.createElement("div");
+    randomRecipeName.id = "randomRecipeName";
+    randomRecipeName.classList.add("corinthia-regular");
+    randomRecipeName.innerText = `${randomData['strMeal']}`;
     let randomImgContainer = document.createElement("div");
     randomImgContainer.id = "randomImgContainer";
     randomImgContainer.innerHTML = `<img src=${randomData['strMealThumb']}>`
-    randomContainer.append(randomTitle, randomImgContainer);
+    randomContainer.append(randomTitle, randomRecipeName, randomImgContainer);
     randomContainer.addEventListener("click", () => {
         setLocalStorage(randomData, "randomData");
         window.location.href = "./randomData.html";
@@ -301,14 +321,19 @@ function populateAlphabetSection(alphabetContainer) {
     let alphabetTitle = document.createElement("div");
     alphabetTitle.id = "alphabetTitle";
     alphabetTitle.innerText = "Select cuisines based on alphabets.";
+    alphabetTitle.classList.add("corinthia-bold");
     let alphabetModal = returnModal("alphabet");
+    let alphabetCardContainer = document.createElement("div");
+    alphabetCardContainer.id = "alphabetCardContainer";
     alphabetContainer.append(alphabetTitle, alphabetModal);
     alphabetArray.forEach(alphabet => {
         let alphabetCard = document.createElement("div");
         alphabetCard.id = "alphabetCard" + `${alphabet}`;
         alphabetCard.innerText = `${alphabet}`;
-        alphabetContainer.appendChild(alphabetCard);
-
+        alphabetCard.classList.add("alphabetCard");
+        alphabetCard.classList.add("corinthia-regular");
+        alphabetCardContainer.appendChild(alphabetCard);
+        alphabetContainer.appendChild(alphabetCardContainer);
         alphabetCard.addEventListener("click", async () => {
             let alphabetData = await getData(alphabetURL + alphabet);
             // console.log(alphabetData);
@@ -349,19 +374,24 @@ function displayAlphabetModal(alphabetModal, alphabetData) {
 function populateAreaSection(areaContainer) {
     let areaTitle = document.createElement("div");
     areaTitle.id = "areaTitle";
-    areaTitle.innerText = "Select cuisines based on country";
+    areaTitle.innerText = "Select cuisines by nation";
+    areaTitle.classList.add("corinthia-bold");
     let areaModal = returnModal("area");
     areaContainer.append(areaTitle, areaModal);
-    listOfCountries.forEach((value, key, map) => {
+    let areaCardContainer = document.createElement("div");
+    areaCardContainer.id = "areaCardContainer";
+    listOfCountries.forEach((value, key) => {
         let areaCard = document.createElement("div");
         areaCard.id = "areaCard" + `${key}`;
         areaCard.innerHTML = `<img src=${value}>`;
+        areaCard.classList.add("areaCard");
         areaCard.addEventListener("click", async () => {
             let areaData = await getData(areaURL + `${key}`);
             areaModal.style.display = "block";
             displayAreaModal(areaModal, areaData);
         });
-        areaContainer.appendChild(areaCard);
+        areaCardContainer.appendChild(areaCard);
+        areaContainer.appendChild(areaCardContainer);
     });
 }
 

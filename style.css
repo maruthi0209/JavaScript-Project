@@ -14,79 +14,76 @@
     font-family: "Corinthia", serif;
     font-weight: 400;
     font-style: normal;
-  }
+}
   
-  .corinthia-bold {
-    font-family: "Corinthia", serif;
-    font-weight: 700;
-    font-style: normal;
-    color : var(--font-text-color); /* Added this line for text color*/
-  }
-  /* CSS code for Font ends*/
+.corinthia-bold {
+  font-family: "Corinthia", serif;
+  font-weight: 700;
+  font-style: normal;
+  color : var(--font-text-color); /* Added this line for text color*/
+}
+/* CSS code for Font ends*/
 
-  /* CSS code for body section*/
-  body {
-    width: 100vw;
-    height: 100vh;
-  }
+/* CSS code for header section*/
+#header {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--main-bg-color);
+  position: relative;
+}
 
-  /* CSS code for header section*/
-  #header {
-    width: 99%;
-    height: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--main-bg-color);
-    position: relative;
-  }
-
-  /* CSS code for logo container*/
-  #logoContainer {
-    width:20%;
-  }
-  #logoContainer > img {
-    display: block;
-    width: 100%;
-    object-fit: contain;
-  }
-
-  /* CSS code for search container*/
-  #searchContainer {
-    width: 30%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: space-evenly;
-    text-align: center;
-  }
-  #searchbar {
-    width: 85%;
-    height: 40px;
-    position: relative;
-    top : 30%;
-    border: 1px solid var(--font-text-color);
-    border-right: none;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-  }
-  #searchbar::placeholder {
-    transform: translate(10%);
-    font-family: "Corinthia", serif;
-    font-size: 1.5rem;
-    color : var(--font-text-color)
-  }
-  #searchButton {
-    width: 15%;
-    height: 40px;
-    position: relative;
-    top : 30%;
-    border: 1px solid;
-    border-left: none;
-    background-color: white;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-  }
+/* CSS code for logo container*/
+#logoContainer {
+  width:20%;
+  height: 100%;
+}
+#logoContainer > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* CSS code for search container*/
+#searchContainer {
+  width: 30%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+#searchbar {
+  width: 85%;
+  height: 40px;
+  position: relative;
+  top : 30%;
+  border: 1px solid var(--font-text-color);
+  border-right: none;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+#searchbar::placeholder {
+  /* transform: translate(10%); */
+  text-align: center;
+  font-family: "Corinthia", serif;
+  font-size: 1.5rem;
+  color : var(--font-text-color)
+}
+#searchButton {
+  width: 15%;
+  height: 40px;
+  position: relative;
+  top : 30%;
+  border: 1px solid var(--font-text-color);
+  border-left: none;
+  background-color: white;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+/* CSS code for NavLink container*/
 #navLinkCheckBox {
   display: none;
 }
@@ -96,6 +93,7 @@
   justify-content: center;
   align-items: center;
   gap : 20px;
+  right: 5%;
 }
 #navLinksContainer img {
   display: block;
@@ -104,7 +102,159 @@
 #searchCheckBox, #searchCheckBoxLabel, #navLinkCheckBoxLabel {
   display: none;
 }
-  
+
+/* CSS code for body section*/
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* CSS code for category container*/
+#categoryContainer {
+  margin: 80px 0px;
+  width: 100%;
+  height: 50%;
+}
+#categoryTitle {
+  font-size: 2rem;
+  text-align: center;
+}
+#categoryCardContainer {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.categoryCard {
+  min-width: 150px;
+  padding: 10px;
+}
+.categoryCard img {
+  display: block;
+  width: 100%;
+}
+.categoryTitleContainer {
+  margin: 10px 0px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--font-text-color);
+}
+/* CSS code for ingredients container*/
+#ingredientContainer {
+  width: 100%;
+  margin: 50px 0px;
+}
+#ingredientTitle {
+  font-size: 2rem;
+  text-align: center;
+}
+#ingredientTitleContainer {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 5px;
+  color: var(--font-text-color);
+}
+#ingredientCardContainer {
+  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap : 10px;
+}
+.ingredientCard {
+/* min-width: 150px; */
+width: clamp(150px, auto, 100%);
+padding: 10px;
+}
+#ingredientImgContainer{
+  width: 100%;
+}
+#ingredientImgContainer img {
+  display: block;
+  width: 100%;
+}
+
+/* CSS code for today special recipe*/
+#randomContainer {
+  width: 100%;
+  margin: 50px 0px;
+}
+#randomTitle, #randomRecipeName {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--font-text-color);
+  text-align: center;
+  padding: 10px 0px;
+}
+#randomImgContainer {
+  width: 60%;
+  margin: auto;
+}
+#randomImgContainer>img {
+  display: block;
+  width: 100%;
+}
+
+/* CSS code for alphabet section*/
+#alphabetContainer {
+  width: 100%;
+  margin: 50px 0px;
+}
+#alphabetTitle {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--font-text-color);
+  text-align: center;
+  padding: 10px 0px;
+}
+#alphabetCardContainer {
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap : 10px;
+}
+.alphabetCard {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--font-text-color);
+}
+#alphabetCardContainer div:hover {
+  border: 1px solid var(--font-text-color);
+}
+
+/*CSS code for area container*/
+#areaContainer {
+  width: 100%;
+  margin: 50px 0px;
+}
+#areaTitle {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--font-text-color);
+  text-align: center;
+  padding: 10px 0px;
+}
+#areaCardContainer {
+  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap : 10px;
+}
+.areaCard {
+  width: clamp(150px, auto, 100%);
+  padding: 10px;
+}
+.areaCard img {
+  display: block;
+  width: 100%;
+}
+
 /* CSS code for footer section*/
 #footer {
   width: 99%;
@@ -130,10 +280,17 @@
   padding: 10px 50px;
 }
 
+
+/* Media Queries*/
 @media screen and (min-width : 768px ) and (max-width : 1024px) {
 
   #logoContainer {
     width: 35%;
+  }
+
+  #navLinksContainer {
+    position: relative;
+    right: 5%;
   }
 
   #navLinksContainer img {
@@ -152,6 +309,11 @@
 
   #logoContainer {
     width: 40%;
+  }
+
+  #navLinksContainer {
+    position: relative;
+    right: 2%;
   }
 
   #searchCheckBox, #searchCheckBoxLabel, #navLinkCheckBoxLabel {
@@ -228,7 +390,6 @@
     width: 75px;
   }
 
-
   #footer {
     height: 22%;
     font-size: clamp(0.3rem , 0.35rem, 0.5rem);
@@ -256,9 +417,12 @@
   #navLinkCheckBox, #searchCheckBox {
     display: none;
   }
+  #navLinkCheckBoxLabel, #searchCheckBoxLabel {
+    display: block;
+  }
   #navLinksContainer, #searchContainer  {
     position: absolute;
-    display: block;
+    display: none;
     right : -100%;
   }
   .menu-outline, .search-outline {
@@ -267,6 +431,7 @@
   }
 
   #navLinkCheckBox:checked~#navLinksContainer {
+    /* display: block; */
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -279,6 +444,7 @@
   }
 
   #searchCheckBox:checked~#searchContainer {
+    display: block;
     right: 0%;
     top : 70%;
     z-index: 1;
@@ -288,6 +454,11 @@
   #navLinksContainer img {
     display: block;
     width: 75px;
+  }
+
+  /* CSS code for containers*/
+  #areaCardContainer, #ingredientCardContainer {
+    padding: 10px;
   }
 
   #footer {
@@ -303,24 +474,6 @@
 
 
 
-
-
-
-
-
-
-
-#maincontainer {
-    width: 200px;
-    height: 200px;
-    background-color: azure;
-    border: 1px solid;
-}
-
-img{
-  display: block;
-  width: 50%;
-}
 
 .loginError{
     display: none;
