@@ -124,13 +124,16 @@ function populateHeaderSection() {
     let logoContainer = document.createElement("div");
     logoContainer.id = "logoContainer";
     logoContainer.innerHTML = "<img src='./MyRecipeFinder.png'>"
+    logoContainer.addEventListener("click", () => {
+        window.location.href = "./home.html";
+    });
     let searchbarContainer = document.createElement("div");
     searchbarContainer.id = "searchContainer";
     let searchBar = document.createElement("input");
     searchBar.id = "searchbar";
     searchBar.type = "text";
     searchBar.placeholder = "Search ingredient or category";
-    // searchBar.placeholder.classList.add("corinthia-regular");
+    // searchBar.placeholder.classList.add("dancing-script-text");
     let searchButton = document.createElement("button");
     searchButton.id = "searchButton";
     searchButton.innerHTML = `<ion-icon name="search-outline"></ion-icon>`;
@@ -216,34 +219,38 @@ async function populateCategorySection(categoryContainer) {
         categoryCard.addEventListener("click", () => {
             categoryModal.style.display = "block";
             displayCategoryModal(categoryModal, category, listOfRecipes);
+            document.body.style.position = "float"; //https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
+            // document.body.style.top = `-${window.scrollY}px`;
         });
     });
 }
 
 function displayCategoryModal(categoryModal, category, listOfRecipes) {
+    categoryModal.innerHTML = '';
     let backButtonContainer = returnBackButton(categoryModal);
     let contentContainer = document.createElement("div");
     contentContainer.id = "contentContainerCategory" + `${category['strCategory']}`;
-    let strCategory = document.createElement("div");
-    strCategory.id = "strCategory";
-    // let strCategoryThumbContainer = document.createElement("div");
-    // strCategoryThumbContainer.id = "strCategoryThumbContainer";
-    // let strCategoryThumb = document.createElement("img");
-    // strCategoryThumb.innerHTML = `<img src=${category['strCategoryThumb']}>`;
-    // strCategoryThumbContainer.appendChild(strCategoryThumb);
-    let strCategoryDescription = document.createElement("div");
-    strCategoryDescription.innerText = `${category['strCategoryDescription']}`;
+    contentContainer.classList.add("strCategoryThumbContainer");
+    contentContainer.classList.add("dancing-script-text");
+    contentContainer.innerHTML = `${category['strCategoryDescription']}`;
+    let contentContainerRecipes = document.createElement("div");
+    contentContainerRecipes.id = "contentContainerRecipes";
+    contentContainer.appendChild(contentContainerRecipes);
     // console.log(listOfRecipes);
     listOfRecipes['meals'].forEach( async meal => {
         // console.log(meal);
         let strCategoryRecipes = document.createElement("div");
         strCategoryRecipes.id = "strCategoryRecipes"+ `${meal['strMeal']}`;
-        strCategoryRecipes.innerText = `${meal['strMeal']}`;
+        strCategoryRecipes.classList.add("dancing-script-text");
+        strCategoryRecipes.classList.add("strCategoryRecipes");
+        let strCategoryRecipesText = document.createElement("div");
+        strCategoryRecipesText.classList.add("strCategoryRecipesText");
+        strCategoryRecipesText.innerText = `${meal['strMeal']}`;
         let strCategoryThumbContainer = document.createElement("div");
         strCategoryThumbContainer.id = "strCategoryThumbContainer" + `${meal['strMeal']}`;
         strCategoryThumbContainer.innerHTML = `<img src=${meal['strMealThumb']}>`;
-        strCategoryRecipes.appendChild(strCategoryThumbContainer);
-        contentContainer.appendChild(strCategoryRecipes);
+        strCategoryRecipes.append(strCategoryThumbContainer, strCategoryRecipesText);
+        contentContainerRecipes.appendChild(strCategoryRecipes);
         strCategoryRecipes.addEventListener("click", async () => {
             await getData(idURL + `${meal['idMeal']}`);
             // console.log((await getData(idURL + `${meal['idMeal']}`))['meals']);
@@ -251,7 +258,7 @@ function displayCategoryModal(categoryModal, category, listOfRecipes) {
             window.location.href = "./randomData.html";
         });
     });
-    contentContainer.append(strCategory, strCategoryDescription);//, strCategoryThumbContainer);
+    // contentContainer.append(strCategory, strCategoryDescription);//, strCategoryThumbContainer);
     categoryModal.append(backButtonContainer, contentContainer);
 }
 
@@ -278,7 +285,7 @@ async function populateIngredientSection(ingredientContainer) {
         let ingredientTitleContainer = document.createElement("div");
         ingredientTitleContainer.id = "ingredientTitleContainer";
         ingredientTitleContainer.innerText = `${ingredient['strMeal']}`;
-        ingredientTitleContainer.classList.add("corinthia-regular");
+        ingredientTitleContainer.classList.add("dancing-script-text");
 
         ingredientCard.append(ingredientImgContainer, ingredientTitleContainer);
         ingredientCardContainer.appendChild(ingredientCard);
@@ -303,7 +310,7 @@ async function populateRandomSection(randomContainer) {
     randomTitle.innerText = "Recipe of the Day!" ;
     let randomRecipeName = document.createElement("div");
     randomRecipeName.id = "randomRecipeName";
-    randomRecipeName.classList.add("corinthia-regular");
+    randomRecipeName.classList.add("dancing-script-text");
     randomRecipeName.innerText = `${randomData['strMeal']}`;
     let randomImgContainer = document.createElement("div");
     randomImgContainer.id = "randomImgContainer";
@@ -331,7 +338,7 @@ function populateAlphabetSection(alphabetContainer) {
         alphabetCard.id = "alphabetCard" + `${alphabet}`;
         alphabetCard.innerText = `${alphabet}`;
         alphabetCard.classList.add("alphabetCard");
-        alphabetCard.classList.add("corinthia-regular");
+        alphabetCard.classList.add("dancing-script-text");
         alphabetCardContainer.appendChild(alphabetCard);
         alphabetContainer.appendChild(alphabetCardContainer);
         alphabetCard.addEventListener("click", async () => {
@@ -344,30 +351,43 @@ function populateAlphabetSection(alphabetContainer) {
 }
 
 function displayAlphabetModal(alphabetModal, alphabetData) {
+    alphabetModal.innerHTML = ``;
     let backButtonContainer = returnBackButton(alphabetModal);
     alphabetModal.appendChild(backButtonContainer);
     let contentContainer = document.createElement("div");
     contentContainer.id = "contentContainerAlphabet";
-    alphabetData['meals'].forEach(meal => {
-        let alphabetCard = document.createElement("div");
-        alphabetCard.id = "alphabetCard";
-        let mealName = document.createElement("div");
-        mealName.id = "mealName";
-        mealName.innerText = `${meal['strMeal']}`;
-        let mealCategory = document.createElement("div");
-        mealCategory.id = "mealCategory";
-        mealCategory.innerText = `${meal['strCategory']}`;
-        let strMealThumbcontainer = document.createElement("div");
-        strMealThumbcontainer.id = "strMealThumbcontainer";
-        strMealThumbcontainer.innerHTML = `<img src=${meal['strMealThumb']}>`;
-        alphabetCard.append(mealName, mealCategory, strMealThumbcontainer);
-        alphabetCard.addEventListener("click", () => {
-            setLocalStorage(meal, "randomData");
-            window.location.href = "./randomData.html";
-        });
-        contentContainer.appendChild(alphabetCard);
+    if (alphabetData['meals'] == null) {
+        contentContainer.classList.add("dancing-script-text");
+        contentContainer.style.textAlign = "center";
+        contentContainer.style.fontSize = "1.5rem";
+        contentContainer.innerText = "Sorry! No available recipes. Try another alphabet."
         alphabetModal.appendChild(contentContainer);
-    });    
+    }
+    else {
+        alphabetData['meals'].forEach(meal => {
+            let alphabetCard = document.createElement("div");
+            alphabetCard.id = "alphabetCard";
+            let mealName = document.createElement("div");
+            mealName.id = "mealName";
+            mealName.classList.add("dancing-script-text");
+            // mealName.innerText = `${meal['strMeal']}`;
+            mealName.innerHTML = `${meal['strMeal']} <br> Category : ${meal['strCategory']}`;
+            // let mealCategory = document.createElement("div");
+            // mealCategory.id = "mealCategory";
+            // mealCategory.classList.add("dancing-script-text");
+            // mealCategory.innerText = `Category : ${meal['strCategory']}`;
+            let strMealThumbcontainer = document.createElement("div");
+            strMealThumbcontainer.id = "alphabetThumbContainer";
+            strMealThumbcontainer.innerHTML = `<img src=${meal['strMealThumb']}> <hr>`;
+            alphabetCard.append(strMealThumbcontainer, mealName);
+            alphabetCard.addEventListener("click", () => {
+                setLocalStorage(meal, "randomData");
+                window.location.href = "./randomData.html";
+            });
+            contentContainer.appendChild(alphabetCard);
+            alphabetModal.appendChild(contentContainer);
+        });    
+    }
 }
 
 
@@ -396,6 +416,7 @@ function populateAreaSection(areaContainer) {
 }
 
 function displayAreaModal(areaModal, areaData) {
+    areaModal.innerHTML = ``;
     let backButtonContainer = returnBackButton(areaModal);
     areaModal.appendChild(backButtonContainer);
     let contentContainer = document.createElement("div");
@@ -405,11 +426,12 @@ function displayAreaModal(areaModal, areaData) {
         mealsCard.id = "mealsCard";
         let mealName = document.createElement("div");
         mealName.id = "mealName";
+        mealName.classList.add("dancing-script-text");
         mealName.innerText = `${meal['strMeal']}`
         let mealThumb = document.createElement("div");
         mealThumb.id = "mealThumb";
         mealThumb.innerHTML = `<img src=${meal['strMealThumb']}>`;
-        mealsCard.append(mealName, mealThumb);
+        mealsCard.append(mealThumb, mealName);
         mealsCard.addEventListener("click", async () => {
             let mealId = await getData(idURL + `${meal['idMeal']}`);
             console.log(mealId)
@@ -430,6 +452,7 @@ function populateFooterSection() {
     aboutContentHeading.innerText = "About Me";
     aboutContent = document.createElement("p");
     aboutContent.id = "aboutContent";
+    aboutContent.classList.add("dancing-script-text");
     aboutContent.innerText = "Hi, My name is Sethu Maruthi and I'm the creator of My Recipe Finder. I like cooking various recipes that I come across my travels to various new places. Hope you find a recipe that touches your heart and fills you with joy. " + ``;
     aboutContainer.append(aboutContentHeading, aboutContent);
     let contactContainer = document.createElement("div");
@@ -439,6 +462,7 @@ function populateFooterSection() {
     contactContentHeading.innerText = "Contact Me";
     contactContent = document.createElement("p");
     contactContent.id = "contactContent";
+    contactContent.classList.add("dancing-script-text");
     contactContent.innerText = "You can reach out to me at sethumaruthi93@gmail.com."
     contactContainer.append(contactContentHeading, contactContent);
     let copyright = document.createElement("div");

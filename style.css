@@ -1,6 +1,9 @@
 :root{
     --main-bg-color : #F8E8EE;
     --font-text-color : #756AB6; 
+
+    --main-bg-dark-color : ;
+    --font-text-dark-color : ;
 }
 
 * {
@@ -19,8 +22,27 @@
 .corinthia-bold {
   font-family: "Corinthia", serif;
   font-weight: 700;
+  font-style: normal; /* Added this line for text color*/
+}
+
+/* .corinthia-bold {
+  color : var(--font-text-color);
+}
+.corinthia-dark {
+  color : var(--font-text-dark-color);
+} */
+
+.dancing-script-text {
+  font-family: "Dancing Script", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
-  color : var(--font-text-color); /* Added this line for text color*/
+}
+.dancing-script-bold {
+  font-family: "Dancing Script", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 /* CSS code for Font ends*/
 
@@ -68,9 +90,9 @@
 #searchbar::placeholder {
   /* transform: translate(10%); */
   text-align: center;
-  font-family: "Corinthia", serif;
-  font-size: 1.5rem;
-  color : var(--font-text-color)
+  font-family: "dancing-script-text", serif;
+  font-size: 1rem;
+  /* color : var(--font-text-color) */
 }
 #searchButton {
   width: 15%;
@@ -121,7 +143,7 @@ body {
 }
 #categoryCardContainer {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,6 +154,9 @@ body {
   min-width: 150px;
   padding: 10px;
 }
+.categoryCard:hover {
+  border : 1px solid var(--font-text-color);
+}
 .categoryCard img {
   display: block;
   width: 100%;
@@ -140,8 +165,57 @@ body {
   margin: 10px 0px;
   font-size: 1.5rem;
   text-align: center;
-  color: var(--font-text-color);
+  /* color: var(--font-text-color); */
 }
+#categoryModal {
+  width: 80%;
+  height: 500px;
+  /* position: fixed; */
+  overflow: scroll;
+  border: 1px solid;
+  margin: auto;
+  /* z-index: 1; */
+  background-color: white;
+}
+#backButtonCategoryContainer {
+  width: 100%;
+  /* align-content: center; */
+}
+#backbuttonCategory {
+  margin: auto;
+  width: 100px;
+  border : none;
+  background-color: white;
+  font-size: 1 rem;
+  height: 50px;
+  /* padding: 10px; */
+}
+.strCategoryThumbContainer {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 20px;
+}
+.strCategoryRecipesText {
+  font-size: 1rem;
+  text-align: center;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#contentContainerRecipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+.strCategoryRecipes {
+  width: minmax(150px, auto, 100%);
+}
+.strCategoryRecipes div img {
+  display: block;
+  width: 100%;
+}
+
 /* CSS code for ingredients container*/
 #ingredientContainer {
   width: 100%;
@@ -153,10 +227,10 @@ body {
 }
 #ingredientTitleContainer {
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
-  padding-top: 5px;
-  color: var(--font-text-color);
+  padding: 20px;
+  /* color: var(--font-text-color); */
 }
 #ingredientCardContainer {
   padding: 20px;
@@ -178,17 +252,22 @@ padding: 10px;
   width: 100%;
 }
 
-/* CSS code for today special recipe*/
+/* CSS code for random recipe*/
 #randomContainer {
   width: 100%;
   margin: 50px 0px;
 }
-#randomTitle, #randomRecipeName {
-  width: 100%;
+#randomTitle {
+  width: 100%;  
   font-size: 2rem;
   color: var(--font-text-color);
   text-align: center;
   padding: 10px 0px;
+}
+#randomRecipeName {
+  font-size: 1rem;
+  text-align: center;
+  padding: 20px;
 }
 #randomImgContainer {
   width: 60%;
@@ -221,10 +300,55 @@ padding: 10px;
 .alphabetCard {
   text-align: center;
   font-size: 1.5rem;
-  color: var(--font-text-color);
+  /* color: var(--font-text-color); */
 }
 #alphabetCardContainer div:hover {
   border: 1px solid var(--font-text-color);
+}
+#alphabetModal {
+  width: 80%;
+  height: 500px;
+  /* position: fixed; */
+  overflow: scroll;
+  border: 1px solid;
+  margin: auto;
+  /* z-index: 1; */
+  background-color: white;
+}
+#backButtonCategoryContainer {
+  width: 100%;
+  background-color: var(--main-bg-color);
+  /* align-content: center; */
+}
+#backbuttonCategory {
+  margin: auto;
+  width: 100px;
+  border : none;
+  background-color: var(--main-bg-color);
+  font-size: 1 rem;
+  height: 50px;
+  /* padding: 10px; */
+}
+#contentContainerAlphabet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+#alphabetCard {
+  padding: 20px;
+  width: minmax(150px, auto, 100%);
+}
+#mealName{
+  font-size: 1rem;
+  text-align: center;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#alphabetThumbContainer img {
+  display: block;
+  width: 100%;
 }
 
 /*CSS code for area container*/
@@ -244,16 +368,128 @@ padding: 10px;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap : 10px;
+  gap : 20px;
 }
 .areaCard {
-  width: clamp(150px, auto, 100%);
-  padding: 10px;
+  width: clamp(100px, 150px, 100%);
+  align-self: center;
+  justify-self: center;
+  padding: 10px;  
+}
+.areaCard:hover {
+  border: 1px dashed var(--font-text-color);
 }
 .areaCard img {
   display: block;
   width: 100%;
+  border: 1px solid black;
 }
+#areaModal {
+  width: 80%;
+  height: 500px;
+  /* position: fixed; */
+  overflow: scroll;
+  border: 1px solid;
+  margin: auto;
+  /* z-index: 1; */
+  background-color: white;
+}
+#contentContainerArea {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+#MealsCard {
+  width: minmax(150px, auto, 100%);
+  padding: 20px;
+}
+#mealName {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+#mealThumb {
+  padding: 20px;
+}
+#mealThumb img {
+  display: block;
+  width: 100%;
+}
+
+/* CSS code for RandomData page start*/
+#mainContainerRandom {
+  width: 100%;
+  /* height: 100%; */
+  /* display: grid;
+  grid-template: repeat(2, 1fr); */
+}
+#randomName {
+  /* grid-area : 1 / 1 / 3 / 2; */
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px 0px;
+}
+#randomFlex {
+  width: 100%;
+  margin: 30px 0px;
+  /* height: 50%; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* gap : 10%; */
+}
+#randomThumb {
+  width: 35%;
+  padding: 10px;
+}
+#randomThumb img {
+  display: block;
+  width: 100%;
+}
+#randomDetails {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  font-size: 1rem;
+}
+#randomCategory, #randomArea {
+  padding: 10px;
+}
+table {
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+}
+table th, table td {
+  text-align: center;
+  border: 1px dotted;
+}
+#randomInstructions {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  /* margin : 20px 0px; */
+  /* padding: 0px 20px; */
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.5rem;
+}
+#randomIFrame, #randomSource {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+iframe {
+  width: 100%;
+}
+
+
+
+/* CSS code for RandomData page end*/
 
 /* CSS code for footer section*/
 #footer {
@@ -335,7 +571,10 @@ padding: 10px;
 }
 
 @media screen and (min-width : 320px) and (width <= 425px) {
-  
+  /* .strCategoryThumbContainer{
+    padding: 10px;
+  } */
+
   #logoContainer {
     width: 70%;
   }
@@ -460,6 +699,11 @@ padding: 10px;
   #areaCardContainer, #ingredientCardContainer {
     padding: 10px;
   }
+
+  /* CSS code for Modals*/
+  /* #MealsCard, #mealsThumb {
+    padding: 0px;
+  } */
 
   #footer {
     height: 18%;

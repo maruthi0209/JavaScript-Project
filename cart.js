@@ -35,6 +35,9 @@ function populateHeaderSection() {
     let logoContainer = document.createElement("div");
     logoContainer.id = "logoContainer";
     logoContainer.innerHTML = "<img src='./MyRecipeFinder.png'>"
+    logoContainer.addEventListener("click", () => {
+        window.location.href = "./home.html";
+    });
     let searchbarContainer = document.createElement("div");
     searchbarContainer.id = "searchContainer";
     let searchBar = document.createElement("input");
@@ -166,6 +169,7 @@ function populateFooterSection() {
     aboutContentHeading.innerText = "About Me";
     aboutContent = document.createElement("p");
     aboutContent.id = "aboutContent";
+    aboutContent.classList.add("dancing-script-text");
     aboutContent.innerText = "Hi, My name is Sethu Maruthi and I'm the creator of My Recipe Finder. I like cooking various recipes that I come across my travels to various new places. Hope you find a recipe that touches your heart and fills you with joy. " + ``;
     aboutContainer.append(aboutContentHeading, aboutContent);
     let contactContainer = document.createElement("div");
@@ -175,6 +179,7 @@ function populateFooterSection() {
     contactContentHeading.innerText = "Contact Me";
     contactContent = document.createElement("p");
     contactContent.id = "contactContent";
+    contactContent.classList.add("dancing-script-text");
     contactContent.innerText = "You can reach out to me at sethumaruthi93@gmail.com."
     contactContainer.append(contactContentHeading, contactContent);
     let copyright = document.createElement("div");
