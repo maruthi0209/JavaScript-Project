@@ -56,10 +56,14 @@ async function postCredentials(userDetails) {
 
 function populateLogin(arrayOfUsers) {
     let mainContainer = document.getElementById("maincontainer");
+    let divContainer = document.createElement("div");
+    divContainer.id = "divContainer";
     let loginEmail = document.createElement("input");
     let loginPass = document.createElement("input");
     let signUpLink = document.createElement("a");
+    signUpLink.id = "signUpLink";
     let forgotPasswordLink = document.createElement("a");
+    forgotPasswordLink.id = "forgotPasswordLink";
     forgotPasswordLink.innerText = "Help me out I forgot my password";
     signUpLink.innerText = "Wanna join the club? Come on in!";
     loginEmail.setAttribute("type", "text");
@@ -69,11 +73,13 @@ function populateLogin(arrayOfUsers) {
     loginEmail.setAttribute("placeholder", "Enter your email");
     loginPass.setAttribute("placeholder", "Enter your password");
     let button = document.createElement("button");
+    button.id = "loginbutton";
     button.innerText = "Click me";
     let loginError = document.createElement("div");
     loginError.className = "loginError";
     loginError.innerText = "Invalid Credentials. Please check your credentials and try again."
-    mainContainer.append(loginError, loginEmail, loginPass, button, signUpLink, forgotPasswordLink);
+    divContainer.append(loginError, loginEmail, loginPass, button, signUpLink, forgotPasswordLink);
+    mainContainer.appendChild(divContainer);
     document.body.appendChild(mainContainer);
 
     button.addEventListener("click", () => {

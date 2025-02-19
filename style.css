@@ -1,9 +1,6 @@
 :root{
     --main-bg-color : #F8E8EE;
     --font-text-color : #756AB6; 
-
-    --main-bg-dark-color : ;
-    --font-text-dark-color : ;
 }
 
 * {
@@ -45,6 +42,29 @@
   font-style: normal;
 }
 /* CSS code for Font ends*/
+
+/*CSS code for login page starts*/
+
+#divContainer {
+  width: 30%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed;
+}
+#email, #password, #loginbutton, .loginError, #signUpLink, #forgotPasswordLink {
+  text-align: center;
+  width: 50%;
+  margin: 20px;
+  /* padding: 30px; */
+}
+/* #email::placeholder, #password::placeholder {
+  text-align: center;
+} */
+
+/*CSS code for login page ends*/
 
 /* CSS code for header section*/
 #header {
@@ -140,6 +160,7 @@ body {
 #categoryTitle {
   font-size: 2rem;
   text-align: center;
+  color: var(--font-text-color);
 }
 #categoryCardContainer {
   width: 100%;
@@ -224,6 +245,7 @@ body {
 #ingredientTitle {
   font-size: 2rem;
   text-align: center;
+  color : var(--font-text-color);
 }
 #ingredientTitleContainer {
   width: 100%;
@@ -486,10 +508,35 @@ table th, table td {
 iframe {
   width: 100%;
 }
-
-
-
 /* CSS code for RandomData page end*/
+
+/*CSS code for Cart page starts*/
+#cartSectionHeader {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 20px 0px;
+}
+#itemsTable {
+  width: 80%;
+  margin: auto;
+}
+#itemsTableHead {
+  font-size: 1.5rem;
+}
+/* .itemsTableRow {
+  height: 500px;
+}
+.itemsTableRow:first-child {
+  width: 55%;
+}
+.itemsTableRow:nth-child(2), .itemsTableRow:nth-child(3), .itemsTableRow:last-child {
+  width: 15%;
+} */
+.itemsTableRow img {
+  width: 100%;
+  display: block;
+}
+/*CSS code for Cart page ends*/
 
 /* CSS code for footer section*/
 #footer {
@@ -504,6 +551,7 @@ iframe {
 }
 #aboutContainer {
   grid-area : 1 / 1 / 2 / 2;
+
 }
 #contactContainer {
   grid-area : 1 / 2 / 2 / 3;
@@ -543,6 +591,16 @@ iframe {
 
 @media screen and (width > 425px) and (max-width : 767px) {
 
+  #divContainer {
+    width: 60%;
+  }
+  #email, #password, #loginbutton, .loginError, #signUpLink, #forgotPasswordLink {
+    text-align: center;
+    width: 60%;
+    margin: 20px;
+    /* padding: 30px; */
+  }
+
   #logoContainer {
     width: 40%;
   }
@@ -574,6 +632,16 @@ iframe {
   /* .strCategoryThumbContainer{
     padding: 10px;
   } */
+
+  #divContainer {
+    width: 90%;
+  }
+  #email, #password, #loginbutton, .loginError, #signUpLink, #forgotPasswordLink {
+    text-align: center;
+    width: 80%;
+    margin: 20px;
+    /* padding: 30px; */
+  }
 
   #logoContainer {
     width: 70%;
@@ -640,6 +708,17 @@ iframe {
 }
 
 @media screen and (max-width : 319px) {
+
+  #divContainer {
+    width: 90%;
+  }
+  #email, #password, #loginbutton, .loginError, #signUpLink, #forgotPasswordLink {
+    text-align: center;
+    width: 80%;
+    margin: 20px;
+    /* padding: 30px; */
+  }
+  
 
   #logoContainer {
     width: 70%;

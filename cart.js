@@ -80,6 +80,7 @@ function populateMainSection() {
     let mainSection = document.getElementById("mainContainer");
     let sectionHeader = document.createElement("div");
     sectionHeader.id = "cartSectionHeader";
+    sectionHeader.classList.add("dancing-script-text");
     sectionHeader.innerText = "Choose from our collection of best cookbooks!."
     let itemsTable = document.createElement("table");
     itemsTable.id = "itemsTable";
@@ -88,14 +89,18 @@ function populateMainSection() {
     let itemsTableBook = document.createElement("th");
     itemsTableBook.id = "itemsTableBook";
     itemsTableBook.innerText = "Cookbooks";
+    itemsTableBook.classList.add("dancing-script-text");
     let itemsTablePrice = document.createElement("th");
     itemsTablePrice.id = "itemsTablePrice";
+    itemsTablePrice.classList.add("dancing-script-text");
     itemsTablePrice.innerText = "Price";
     let itemsTableQuantity = document.createElement("th");
     itemsTableQuantity.id = "itemsTableQuantity";
+    itemsTableQuantity.classList.add("dancing-script-text");
     itemsTableQuantity.innerText = "Quantity";
     let itemsTableTotalCost = document.createElement("th");
     itemsTableTotalCost.id = "itemsTableTotalCost";
+    itemsTableTotalCost.classList.add("dancing-script-text");
     itemsTableTotalCost.innerText = "Total Cost";
     let cartTotalAmount = document.createElement("tr");
     cartTotalAmount.id = "cartTotal";
@@ -119,6 +124,7 @@ function populateMainSection() {
 
 let getItemsTableRows = function (cook, cartTotalAmount) {
     let itemsTableRow = document.createElement("tr");
+    itemsTableRow.className = "itemsTableRow";
     itemsTableRow.id = "itemsTableRow" + `${cook['name']}`;
     let itemsTableBook = document.createElement("td");
     itemsTableBook.id = "itemsTableBook" + `${cook['name']}`;

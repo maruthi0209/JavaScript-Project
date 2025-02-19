@@ -44,7 +44,5 @@ Responsive Design: Media Queries for mobile-friendly layout
 To Be Done - 
 1. Search functionality
 2. User Validation
-3. Cart functionality
-5. UI completion.
 6. Loader 
 7. Toast messages.
